@@ -24,7 +24,7 @@
         .banner {
             display: none;
             position: absolute;
-            top: 40%;
+            top: 30%; /* Adjusted to be higher */
             left: 0;
             white-space: nowrap;
         }
@@ -118,7 +118,7 @@ __|___|_______________________|___|__
                 banner.classList.add('active');
                 if (marginLeft >= (viewportWidth / 1.7)) {
                     bannerStopped = true;
-                    showCake();
+                    setTimeout(showCake, 1000); // Show the cake after a short delay
                 }
             }
 
