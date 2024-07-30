@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FX 2024</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: monospace;
+            white-space: pre;
+            position: relative;
+        }
+        .pre-block {
+            display: none;
+        }
+        .pre-block.active {
+            display: block;
+        }
+        .banner {
+            display: none;
+            position: absolute;
+            top: 40%;
+            left: 0;
+            white-space: nowrap;
+        }
+        .banner.active {
+            display: block;
+        }
+        .cake {
+            display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .cake.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <pre class="pre-block">
+     _       ____
+    |_/____o_/_/__ |
+     &gt;-----_/_/___]&gt;
+              'o   |
+    </pre>
+    <pre class="pre-block">
+     _       ____
+    |_/____o_/_/__ ,
+     &gt;-----_/_/___]&gt;
+              'o   `
+    </pre>
+    <pre class="pre-block">
+     _       ____
+    |_/____o_/_/__
+     &gt;-----_/_/___]x
+              'o
+    </pre>
+    <pre class="pre-block">
+     _       ____
+    |_/____o_/_/__ ,
+     &gt;-----_/_/___]&gt;
+              'o   `
+    </pre>
+
+    <pre class="banner">Happy Birthday FX!</pre>
+    <pre class="cake">
+                0   0
+                |   |
+            ____|___|____
+         0  |~ ~ ~ ~ ~ ~|   0
+         |  |           |   |
+      ___|__|___________|___|__
+      |/\/\/\/\/\/\/\/\/\/\/\/|
+  0   |       H a p p y       |   0
+  |   |/\/\/\/\/\/\/\/\/\/\/\/|   |
+__|___|_______________________|___|__
+|/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/|
+|                                   |
+|         B i r t h d a y! ! !      |
+| ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ |
+|___________________________________|
+
+
+    </pre>
+
+    <script>
+        const preBlocks = document.querySelectorAll('.pre-block');
+        const banner = document.querySelector('.banner');
+        const cake = document.querySelector('.cake');
+        let currentIndex = 0;
+        let marginLeft = 0;
+        let bannerStopped = false;
+
+        function showNextBlock() {
+            const viewportWidth = window.innerWidth;
+
+            if (marginLeft > viewportWidth) {
+                preBlocks[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % preBlocks.length;
+                preBlocks[currentIndex].classList.add('active');
+                marginLeft = 0;
+            }
+
+            preBlocks[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % preBlocks.length;
+            preBlocks[currentIndex].classList.add('active');
+            preBlocks[currentIndex].style.marginLeft = `${marginLeft}px`;
+
+            if (!bannerStopped) {
+                banner.style.marginLeft = `${marginLeft - 200}px`; // Adjust the banner position relative to the plane
+                banner.classList.add('active');
+                if (marginLeft >= (viewportWidth / 1.7)) {
+                    bannerStopped = true;
+                    showCake();
+                }
+            }
+
+            marginLeft += 20;
+        }
+
+        function showCake() {
+            cake.classList.add('active');
+        }
+
+        setInterval(showNextBlock, 100); // Change block every 0.1 seconds
+
+        // Initialize by showing the first block and the banner
+        preBlocks[currentIndex].classList.add('active');
+        preBlocks[currentIndex].style.marginLeft = `${marginLeft}px`;
+        banner.style.marginLeft = `${marginLeft - 200}px`;
+        banner.classList.add('active');
+    </script>
+</body>
+</html>
